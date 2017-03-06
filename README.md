@@ -1,11 +1,14 @@
 # Tools
 Go Tools to Help Us Out
 
-### Arrayifier Library
-#### Functions
+## Installing
+
+`go get github.com/NYU-Efficient-Room-Traversal/Tools/...`
+
+## Arrayifier Library
+### Functions
 `func Arrayify(filepath string) [][]Pixel`
 
-#### Description
 Converts a JPG or PNG image to a two dimensional array of `Pixels`, which
 represent hues of a pixel from the HSV colorspace. For more info on `image` and the
 HSV colorspace, look [here](https://golang.org/pkg/image/).
