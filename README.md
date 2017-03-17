@@ -17,3 +17,8 @@ Each value `[x][y]` will hold a `float64` array of size three, **hue**, **satura
 
 Example: `[0][0][0]` will return the hue of the upper left pixel.
 
+### Other Useful Tools
+
+**Finding a Raspberry Pi on the network**
+
+`# arp -na | grep -i b8:27:eb`
