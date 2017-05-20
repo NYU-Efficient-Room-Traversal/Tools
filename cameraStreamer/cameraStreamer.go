@@ -46,9 +46,6 @@ func handleRequest(conn net.Conn, ch chan<- image.Image) {
 }
 
 func Open(ch chan<- image.Image) {
-	// Attach Channel
-	channel = ch
-
 	// Get IP Address
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
