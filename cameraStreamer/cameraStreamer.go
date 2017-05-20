@@ -1,4 +1,4 @@
-package cameraStreamer // import github.com/NYU-Efficient-Room-Traversal/Tools/cameraStreamer
+package cameraStreamer
 
 import (
 	"bufio"
