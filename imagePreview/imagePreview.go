@@ -16,20 +16,29 @@ func handler(res http.ResponseWriter, req *http.Request) {
 	fmt.Println("Image Requested")
 
 	img := <-ch
-	rgba := img.(*image.RGBA)
-	mat := rangefinder.NewMonoImageMatrix(rgba, 100)
+	
+	
+	rgba, ok := img.(*image.RGBA)
+    if !ok {
+        fmt.Println("Type Assertion for RGBA image failed")
+        return
+    }
+
+    mat := rangefinder.NewMonoImageMatrix(rgba, 1200)
 
 	res.Header().Set("Content-Type", "image/png")
-	err := png.Encode(res, matToImage(mat))
+    err := png.Encode(res, matToImage(mat))
+    //err := png.Encode(res,img)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("PNG ENCODE ERROR: %v", err)
+        return
 	}
 }
 
 func matToImage(mat *rangefinder.MonoImageMatrix) image.Image {
 	img := image.NewGray(image.Rectangle{Max: image.Point{X: mat.Width, Y: mat.Height}})
-	for x := 0; x < mat.Width; x++ {
-		for y := 0; y < mat.Height; y++ {
+	for x := 0; x < mat.Height; x++ {
+		for y := 0; y < mat.Width; y++ {
 			if mat.Image[x][y] {
 				img.SetGray(x, y, color.Gray{Y: 255})
 			} else {
@@ -37,14 +46,15 @@ func matToImage(mat *rangefinder.MonoImageMatrix) image.Image {
 			}
 		}
 	}
+
 	return img
 }
 
 func main() {
-	ch = make(chan image.Image, 10)
+	ch = make(chan image.Image)
 	go cameraStreamer.Open(ch)
 
+    fmt.Println("Server Starting at: localhost:8086")
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8086", nil)
-	fmt.Println("vim-go")
 }
