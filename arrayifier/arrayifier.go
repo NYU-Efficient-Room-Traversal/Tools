@@ -1,11 +1,4 @@
-//
-// Go Tools for Laser Range Finder
-// arrayifier.go
-//
-// Cole Smith - css@nyu.edu
-// Eric Lin   - eric.lin@nyu.edu
-// LICENSE: GPL 3.0
-//
+
 
 package arrayifier
 
@@ -30,5 +23,10 @@ func NewPixel(hue, sat, val float64) *Pixel {
 // array of pixels of that image in HSV colorspace
 func Arrayify(filePath string) [][]Pixel {
 	// ...
+	print("Currently reading: " + filePath)
 	return make([][]Pixel, 10) // Placeholder
+}
+
+func main(){
+	
 }
